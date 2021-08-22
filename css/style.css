@@ -1,0 +1,97 @@
+/*
+Site	:	WWW.FEWPRESS.COM
+Author	:	Md. Rokonuzzaman Rokon
+ * 
+ */
+ 
+ body
+ { color:#000;}
+
+header{
+	background: #191970;
+	height: 70px;
+	color:#fff;
+}
+.btn-success{
+	background:#191970 !important;
+}
+a{text-decoration: none;color: #fff;}
+header p{padding-top:20px;}
+footer{
+	background: #191970;
+	height: 100px;
+	color:#fff;
+}
+footer p{padding-top:50px;}
+.image{
+	padding-top:10%;
+	height: 453px;
+}
+.intro{
+	margin:150px 0px 150px 70px;
+}
+.question{height: 403px;}
+.result-logo{margin-left: 42%;margin-top:1.6%;}
+.result-logo1{margin-left: 55%;}
+.result-container{margin-left: 40%;margin-top:1%; color:#684B68;}
+.logout{padding-top:100px;}
+.next{margin-left:200px;}
+.answer{color:green;font-weight: 300;font-size: larger; }
+.result{height: 452px;}
+#timer{ float:right;padding: 5px 20px 0 0;}
+
+.one{
+	width:80px;
+	height:auto;
+	float:left;
+	text-align:center;
+	padding:2px;}
+	
+	.two{
+	width:90px;
+	height:auto;
+	float:left;
+	padding:2px;}
+
+.three{
+	width:120px;
+	height:auto;
+	float:left;
+	padding:2px;}
+
+.four{
+	width:130px;
+	height:auto;
+	float:left;
+	padding:2px;}
+
+.five{
+	width:120px;
+	height:auto;
+	float:left;
+	padding:2px;}
+	
+.special{
+	width:100%;
+	height:150px !important;
+	border-top: 3px #272726 solid;
+	
+	color: #BBBBB9;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	
+}
+.special h4{	
+	color:#191970;
+	font-weight:bold;	
+}
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+  text-align:center;
+  color:#FFF;
+}

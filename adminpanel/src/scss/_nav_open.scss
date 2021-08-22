@@ -1,0 +1,20 @@
+/********** minimize ********/
+body.nav-open{
+    position: relative;
+    overflow-x: hidden;
+    .main-content {
+        transform: translate3d(230px,0,0)
+    }
+
+    .main-sidebar{
+        display: block;
+        width: 230px;
+    }
+
+    .top-navigation{
+
+        .top-navbar{
+            width: 100%;
+        }
+    } 
+}

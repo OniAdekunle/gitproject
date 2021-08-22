@@ -1,0 +1,69 @@
+.main-sidebar{  
+    display: block;
+    width: 230px;
+}    
+.main-content{
+    width: calc(100% - 230px);
+    margin-left: 230px;
+}
+
+.top-navigation{
+    .logo-container{
+        width: 230px;
+        display: flex;
+    }
+    .toggle-container{
+        display: inline-block;
+    }   
+    .menu-open-container{
+        display: none;
+    } 
+    .top-navbar{
+        width: calc(100% - 230px);
+    }
+}
+
+/********** minimize ********/
+body.minimize{
+    .top-navigation{
+        .logo-container{
+            width: 50px;
+        }
+        .top-navbar{
+            width: calc(100% - 50px);
+        }
+        .sm-logo{
+            display: block;
+        }
+        .lg-logo{
+            display: none;
+            opacity: 0;
+        }
+    } 
+    .side-nav-container{
+        li{
+            padding: 20px 0px;
+            text-align: center;
+            padding-left: 15px;
+        }
+        li.header p{
+            display: none;
+        }    
+    }    
+    .main-sidebar{
+        width: 50px;
+
+        .info-txt{
+            display: none;
+        }
+        .user-container {
+            .user-info {
+                display: none;
+            }
+        }        
+    }
+    .main-content{
+        width: calc(100% - 50px);
+        margin-left: 50px;
+    }
+}
