@@ -1,6 +1,6 @@
-PHP-Quize
+PHP-Quiz
 =========
 
-PHP Quize
+PHP Quiz
 ----------------
 Responsive Quiz Application Using PHP, MySQL, jQuery, Ajax and Twitter Bootstrap
