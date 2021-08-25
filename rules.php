@@ -4,9 +4,9 @@ require 'adminpanel/src/halimah.php';
 
 
 $queryimageRandom11 = "SELECT category_id,stagesid,qtypeid,q_status FROM isquestions 
-WHERE category_id = '".$_POST['category']."' 
-AND stagesid = '".$_POST['qstage']."' 
-AND qtypeid = '".$_POST['qtype']."'
+WHERE category_id = '".mysqli_real_escape_string($db,$_POST['category'])."' 
+AND stagesid = '".mysqli_real_escape_string($db,$_POST['qstage'])."' 
+AND qtypeid = '".mysqli_real_escape_string($db,$_POST['qtype'])."'
 AND q_status = 'Disabled'";
 $imageRandom11 = mysqli_query($db,$queryimageRandom11) or die(mysqli_error());
 $rowimageRandom11 = mysqli_fetch_assoc($imageRandom11);
