@@ -1,9 +1,9 @@
 <?php
-session_start();
+include('adminpanel/src/session.php');
 
 require 'rules.php';
 
-require 'adminpanel/src/halimah.php';
+require_once 'config.php';
 					
 $category='';
  if(!empty($_POST['name'])){

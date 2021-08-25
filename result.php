@@ -1,8 +1,7 @@
 <?php
-session_start();
-error_reporting(0);
+include('adminpanel/src/session.php');
 
-require 'adminpanel/src/halimah.php';
+require_once 'config.php';
 if(!empty($_SESSION['name'])){
     
     $right_answer = 0;

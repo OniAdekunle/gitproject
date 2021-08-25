@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 
-require 'adminpanel/src/halimah.php';
+require_once 'config.php';
 ?>
 <!DOCTYPE html>
 <html>
