@@ -1,9 +1,9 @@
 <?php
 
-/* $Hamzathostname_Mirror = "localhost";
-$HamzatUser_Mirrior = "root";
-$HamzatPass_Mirror = "1974HAMZAcom";
-$Hamzatdatabase_Mirrior = "quiz_table"; */
+//$Hamzathostname_Mirror = "localhost";
+//$HamzatUser_Mirrior = "root";
+//$HamzatPass_Mirror = "1974HAMZAcom";
+//$Hamzatdatabase_Mirrior = "quiz_table"; 
 
 $Hamzathostname_Mirror = "remotemysql.com";
 $HamzatUser_Mirrior = "cOYfI99iLm";

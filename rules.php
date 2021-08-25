@@ -1,6 +1,8 @@
 <?php
 
 require 'adminpanel/src/halimah.php';
+
+
 $queryimageRandom11 = "SELECT category_id,stagesid,qtypeid,q_status FROM isquestions 
 WHERE category_id = '".$_POST['category']."' 
 AND stagesid = '".$_POST['qstage']."' 

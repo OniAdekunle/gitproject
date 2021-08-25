@@ -1,24 +1,25 @@
 <?php
 include('adminpanel/src/session.php');
 
-require_once 'config.php';
+require_once 'adminpanel/src/halimah.php';
+
 if(!empty($_SESSION['name'])){
     
     $right_answer = 0;
     $wrong_answer = 0;
     $unanswered = 0; 
   
-   $keys=array_keys($_POST);
-   $order=join(",",$keys);
+   $keys = array_keys($_POST);
+   $order = join(",",$keys);
    
    //$query="select * from questions id IN($order) ORDER BY FIELD(id,$order)";
   // echo $query;exit;
-   
-   $response = mysql_query("SELECT id,answer,stagesid,qtypeid,question_name FROM isquestions WHERE id IN($order) ORDER BY FIELD(id,$order)"); // or die(mysql_error());;
+   include 'adminpanel/src/halimah.php';
+   $response = mysqli_query($db,"SELECT id,answer,stagesid,qtypeid,question_name FROM isquestions WHERE id IN($order) ORDER BY FIELD(id,$order)"); // or die(mysql_error());;
    
    $qus = array();
    
-   while($result=mysql_fetch_array($response)){
+   while($result = mysqli_fetch_array($response)){
 	   
 	   $qus[] = $result['question_name'];
 	   
@@ -35,12 +36,12 @@ if(!empty($_SESSION['name'])){
    $newone = implode(",",(array)$qus);
    
    $name = $_SESSION['name'];
-   $resp = mysql_query("SELECT id,user_name FROM isusers WHERE user_name = '$name' ORDER BY id DESC LIMIT 1");
-   $respi = mysql_fetch_assoc($resp);   
+   $resp = mysqli_query($db,"SELECT id,user_name FROM isusers WHERE user_name = '$name' ORDER BY id DESC LIMIT 1");
+   $respi = mysqli_fetch_assoc($resp);   
    $last_id = $respi['id'];
    
      
-    mysql_query("UPDATE isusers SET score = '$right_answer' WHERE user_name = '$name' AND id = '".$last_id."'");
+    mysqli_query($db,"UPDATE isusers SET score = '$right_answer' WHERE user_name = '$name' AND id = '".$last_id."'");
 	
    //$nPhone = $_SESSION['qnums'];
    //$nQtype = isset($_SESSION['qtype']);
@@ -48,8 +49,11 @@ if(!empty($_SESSION['name'])){
    //$id = $_SESSION['id'];
    
    if(!empty($_SESSION['name'])){	
+   
+   
+   include 'adminpanel/src/halimah.php';
   
-   mysql_query("INSERT INTO isscores(acct_name,acct_number,score_id,stage_id,qtype_id,cat_id)
+   mysqli_query($db,"INSERT INTO isscores(acct_name,acct_number,score_id,stage_id,qtype_id,cat_id)
    VALUES ('$name','$nPhone','$right_answer','".$_SESSION['qstagei']."','".$_SESSION['qtypei']."','".$_SESSION['categoryi']."')") or die('the problem is here One,contact webmaster'.mysql_error()); 
    
    }
@@ -58,7 +62,7 @@ if(!empty($_SESSION['name'])){
 		$pieces = array_unique(array_merge(explode(',', $getit)));
 		
 		foreach($pieces as $preps ) {  
-		mysql_query("UPDATE isquestions SET q_status = 'Disabled' 
+		mysqli_query($db,"UPDATE isquestions SET q_status = 'Disabled' 
 		WHERE question_name = '".$preps."' 
 		");
 		

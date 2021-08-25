@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 
-require_once 'config.php';
+require_once 'adminpanel/src/halimah.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,9 +43,9 @@ require_once 'config.php';
                     <?php
                   $query_imageRandomPROis = "SELECT DISTINCT(qstage_id) FROM isusers 
 				  WHERE user_name = '".$_SESSION['name']."'";
-				  $imageRandomPROis = mysql_query($query_imageRandomPROis,$con) or die(mysql_error());				  
+				  $imageRandomPROis = mysqli_query($db,$query_imageRandomPROis) or die(mysqli_error());				  
 				  $sti = Array();
-				  while($row_imageRandomPROis = mysql_fetch_array($imageRandomPROis)){
+				  while($row_imageRandomPROis = mysqli_fetch_array($imageRandomPROis)){
 				  $sti[] = $row_imageRandomPROis['qstage_id'];
 				  
 				  }
@@ -144,19 +144,19 @@ require_once 'config.php';
 $i=0;
 
 $get_p = "select * from isscores WHERE acct_name = '".$_SESSION['name']."'";
-$run_pi = mysql_query($get_p);
-$run_pii = mysql_fetch_array($run_pi);
+$run_pi = mysqli_query($db,$get_p);
+$run_pii = mysqli_fetch_array($run_pi);
 $ci = $run_pii['cat_id'];
 $cii = $run_pii['qtype_id'];
 
 $get_postsi = "select * from isquestions WHERE category_id = '".$ci."' AND qtypeid = '$cii'";
-$run_poi = mysql_query($get_postsi);
-$rowsii = mysql_num_rows($run_poi);
+$run_poi = mysqli_query($db,$get_postsi);
+$rowsii = mysqli_num_rows($run_poi);
 
 
 $get_posts = "SELECT DISTINCT(qstage_id),user_name,score FROM isusers WHERE user_name = '".$_SESSION['name']."'";
-$run_posts = mysql_query($get_posts);
-while($row_posts = mysql_fetch_array($run_posts)){
+$run_posts = mysqli_query($db,$get_posts);
+while($row_posts = mysqli_fetch_array($run_posts)){
 $post_id = $row_posts['user_name'];
 $post_title = $row_posts['score'];
 $post_author = $row_posts['qstage_id'];
@@ -202,14 +202,6 @@ $i++;
     					echo $_SESSION['msg'];
     					unset($_SESSION['msg']); // remove it now we have used it
 						
-						/*					
-						if(isset($_GET)){
-							echo $_GET['msg']; // print_r($_GET);       
-						}else{
-						  echo "Url has no message";
-						}
-						*/
-
 						?>
 							
 						</p>
@@ -229,9 +221,9 @@ $i++;
                                    
                                     <?php 
                                     $query_imageRandomPROix = "SELECT * FROM iscategories";
-				  $imageRandomPROix = mysql_query($query_imageRandomPROix,$con) or die(mysql_error());
-				  $row_imageRandomPROix = mysql_fetch_assoc($imageRandomPROix);
-				  $totalRows_imageRandomPROix = mysql_num_rows($imageRandomPROix);
+				  $imageRandomPROix = mysqli_query($db,$query_imageRandomPROix) or die(mysqli_error());
+				  $row_imageRandomPROix = mysqli_fetch_assoc($imageRandomPROix);
+				  $totalRows_imageRandomPROix = mysqli_num_rows($imageRandomPROix);
 				  
 				  ?>
                   <?php do{?>
@@ -241,7 +233,7 @@ $i++;
                                   <!--<option value="2">HTML</option>
                                   <option value="3">PHP</option>
                                   <option value="4">CSS</option> --> 
-                                  <?php } while ($row_imageRandomPROix =  mysql_fetch_assoc($imageRandomPROix)); ?>                              
+                                  <?php } while ($row_imageRandomPROix =  mysqli_fetch_assoc($imageRandomPROix)); ?>                              
                                 </select>
                                 <span class="help-block"></span>
 							</div>
@@ -252,16 +244,16 @@ $i++;
                              
                              <?php 
                                     $query_imageRandomPROiixt = "SELECT * FROM istype";
-				  $imageRandomPROiixt = mysql_query($query_imageRandomPROiixt,$con) or die(mysql_error());
-				  $row_imageRandomPROiixt = mysql_fetch_assoc($imageRandomPROiixt);
-				  $totalRows_imageRandomPROiixt = mysql_num_rows($imageRandomPROiixt);
+				  $imageRandomPROiixt = mysqli_query($db,$query_imageRandomPROiixt) or die(mysqli_error());
+				  $row_imageRandomPROiixt = mysqli_fetch_assoc($imageRandomPROiixt);
+				  $totalRows_imageRandomPROiixt = mysqli_num_rows($imageRandomPROiixt);
 				  
 				  ?>
                   <?php do{?>
                                   <option value="<?php echo $row_imageRandomPROiixt['id'];?>">
 				  <?php echo $row_imageRandomPROiixt['qtype_name'];?>
                   </option> 
-                  <?php } while ($row_imageRandomPROiixt = mysql_fetch_assoc($imageRandomPROiixt)); ?>                             
+                  <?php } while ($row_imageRandomPROiixt = mysqli_fetch_assoc($imageRandomPROiixt)); ?>                             
                               </select>
                                 <span class="help-block"></span>
 							</div>
@@ -271,16 +263,16 @@ $i++;
                             
                              <?php 
                                     $query_imageRandomPROiix = "SELECT * FROM isstage ORDER BY qst_id DESC limit 1 ";
-				  $imageRandomPROiix = mysql_query($query_imageRandomPROiix,$con) or die(mysql_error());
-				  $row_imageRandomPROiix = mysql_fetch_assoc($imageRandomPROiix);
-				  $totalRows_imageRandomPROiix = mysql_num_rows($imageRandomPROiix);
+				  $imageRandomPROiix = mysqli_query($db,$query_imageRandomPROiix) or die(mysqli_error());
+				  $row_imageRandomPROiix = mysqli_fetch_assoc($imageRandomPROiix);
+				  $totalRows_imageRandomPROiix = mysqli_num_rows($imageRandomPROiix);
 				  
 				  ?>
                   <?php do{?>
                                   <option value="<?php echo $row_imageRandomPROiix['qst_id'];?>">
 				  <?php echo $row_imageRandomPROiix['stage_name'];?>
                   </option> 
-                  <?php } while ($row_imageRandomPROiix = mysql_fetch_assoc($imageRandomPROiix)); ?>
+                  <?php } while ($row_imageRandomPROiix = mysqli_fetch_assoc($imageRandomPROiix)); ?>
                             </select>
                             <span class="help-block"></span>
                                         </div>
@@ -299,9 +291,9 @@ $i++;
                                     
                                     <?php 
                                     $query_imageRandomPROi = "SELECT * FROM iscategories ORDER BY id DESC";
-				  $imageRandomPROi = mysql_query($query_imageRandomPROi,$con) or die(mysql_error());
-				  $row_imageRandomPROi = mysql_fetch_assoc($imageRandomPROi);
-				  $totalRows_imageRandomPROi = mysql_num_rows($imageRandomPROi);
+				  $imageRandomPROi = mysqli_query($db,$query_imageRandomPROi) or die(mysql_error());
+				  $row_imageRandomPROi = mysqli_fetch_assoc($imageRandomPROi);
+				  $totalRows_imageRandomPROi = mysqli_num_rows($imageRandomPROi);
 				  
 				  ?>
                   <?php do{?>
@@ -311,7 +303,7 @@ $i++;
                                   <!--<option value="2">HTML</option>
                                   <option value="3">PHP</option>
                                   <option value="4">CSS</option> --> 
-                                  <?php } while ($row_imageRandomPROi =  mysql_fetch_assoc($imageRandomPROi)); ?>                              
+                                  <?php } while ($row_imageRandomPROi =  mysqli_fetch_assoc($imageRandomPROi)); ?>                              
                                 </select>
                                 <span class="help-block"></span>
 							</div>
@@ -322,16 +314,16 @@ $i++;
                                
                              <?php 
                                     $query_imageRandomPROii = "SELECT * FROM istype";
-				  $imageRandomPROii = mysql_query($query_imageRandomPROii,$con) or die(mysql_error());
-				  $row_imageRandomPROii = mysql_fetch_assoc($imageRandomPROii);
-				  $totalRows_imageRandomPROii = mysql_num_rows($imageRandomPROii);
+				  $imageRandomPROii = mysqli_query($db,$query_imageRandomPROii) or die(mysql_error());
+				  $row_imageRandomPROii = mysqli_fetch_assoc($imageRandomPROii);
+				  $totalRows_imageRandomPROii = mysqli_num_rows($imageRandomPROii);
 				  
 				  ?>
                   <?php do{?>
                                   <option value="<?php echo $row_imageRandomPROii['id'];?>">
 				  <?php echo $row_imageRandomPROii['qtype_name'];?>
                   </option> 
-                  <?php } while ($row_imageRandomPROii = mysql_fetch_assoc($imageRandomPROii)); ?>                              
+                  <?php } while ($row_imageRandomPROii = mysqli_fetch_assoc($imageRandomPROii)); ?>                              
                                </select>
                                 <span class="help-block"></span>
 							</div>
@@ -345,15 +337,15 @@ $i++;
 				  WHERE qst_id NOT IN (SELECT qstage_id FROM isusers 
 				  WHERE user_name = '".$_SESSION['name']."' AND user_phone = '".$_SESSION['qnums']."') 
 				  ORDER BY qst_id DESC";
-				  $imageRandomPRO = mysql_query($query_imageRandomPRO,$con) or die(mysql_error());
-				  $row_imageRandomPRO = mysql_fetch_assoc($imageRandomPRO);
-				  $totalRows_imageRandomPRO = mysql_num_rows($imageRandomPRO);
+				  $imageRandomPRO = mysqli_query($db,$query_imageRandomPRO) or die(mysql_error());
+				  $row_imageRandomPRO = mysqli_fetch_assoc($imageRandomPRO);
+				  $totalRows_imageRandomPRO = mysqli_num_rows($imageRandomPRO);
 				  ?>
                  <?php do { ?>
                   <option value="<?php echo $row_imageRandomPRO['qst_id'];?>">
 				  <?php echo $row_imageRandomPRO['stage_name'];?>
                   </option>     
-                  <?php } while ($row_imageRandomPRO =  mysql_fetch_assoc($imageRandomPRO)); ?>               
+                  <?php } while ($row_imageRandomPRO =  mysqli_fetch_assoc($imageRandomPRO)); ?>               
                   </select>  
                             <span class="help-block"></span>
                                         </div>

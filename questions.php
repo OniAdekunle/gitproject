@@ -1,20 +1,21 @@
 <?php
 include('adminpanel/src/session.php');
 
+require_once 'adminpanel/src/halimah.php';
 require 'rules.php';
 
-require_once 'config.php';
 					
 $category='';
  if(!empty($_POST['name'])){
-     $name = $_POST['name'];
-     $category = $_POST['category'];
-	 $qnums = $_POST['qnums'];
-	 $qstage = $_POST['qstage'];
-	 $qtype = $_POST['qtype'];
+     $name = mysqli_real_escape_string($db,$_POST['name']);
+     $category = mysqli_real_escape_string($db,$_POST['category']);
+	 $qnums = mysqli_real_escape_string($db,$_POST['qnums']);
+	 $qstage = mysqli_real_escape_string($db,$_POST['qstage']);
+	 $qtype = mysqli_real_escape_string($db,$_POST['qtype']);
 	 
-     mysql_query("INSERT INTO isusers (user_name,user_phone,score,category_id,qstage_id,qtype_id)
-	 VALUES ('$name','$qnums',0,'$category','$qstage','$qtype')") or die(mysql_error());
+	 include 'adminpanel/src/halimah.php';
+     mysqli_query($db,"INSERT INTO isusers (user_name,user_phone,score,category_id,qstage_id,qtype_id)
+	 VALUES ('$name','$qnums',0,'$category','$qstage','$qtype')") or die(mysqli_error());
 	 
      $_SESSION['name'] = $name;
 	 $_SESSION['qnums'] = $qnums;
@@ -23,18 +24,19 @@ $category='';
      $_SESSION['id'] = mysql_insert_id();
  }else
 
-$category = $_POST['category'];
-$qstage = $_POST['qstage'];
-$qtype = $_POST['qtype'];
+$category = mysqli_real_escape_string($db,$_POST['category']);
+$qstage = mysqli_real_escape_string($db,$_POST['qstage']);
+$qtype = mysqli_real_escape_string($db,$_POST['qtype']);
 //$qnums = $_POST['qnums'];
 if(!empty($_SESSION['name'])){	
-     mysql_query("INSERT INTO isusers (user_name,user_phone,score,category_id,qstage_id,qtype_id)
+ include 'adminpanel/src/halimah.php';
+     mysqli_query($db,"INSERT INTO isusers (user_name,user_phone,score,category_id,qstage_id,qtype_id)
 	 VALUES ('".$_SESSION['name']."','".$_SESSION['qnums']."',0,'$category','$qstage','$qtype')") 
-	 or die(mysql_error());
+	 or die(mysqli_error());
 	 
-	 $_SESSION['categoryi'] = $_POST['category'];
-	 $_SESSION['qstagei'] = $_POST['qstage'];;
-	 $_SESSION['qtypei'] = $_POST['qtype'];
+	 $_SESSION['categoryi'] = mysqli_real_escape_string($db,$_POST['category']);
+	 $_SESSION['qstagei'] = mysqli_real_escape_string($db,$_POST['qstage']);
+	 $_SESSION['qtypei'] = mysqli_real_escape_string($db,$_POST['qtype']);
 	 
 	     
 ?>
@@ -95,20 +97,18 @@ if(!empty($_SESSION['name'])){
 				<p>
 					Simple football quiz game to test your knowledge!
                     
-                   <?php 
-				  // print $rowimageRandom11['q_status'].'&nbsp;cat-;'.$rowimageRandom11['category_id'].'&nbsp;stage-'.$rowimageRandom11['stagesid'].'&nbsp;type-;'.$rowimageRandom11['qtypeid'];
-				   ?>
-                  
+                 
 				</p>
 				<hr>
 				<form class="form-horizontal" role="form" id='login' method="post" action="result.php">
 					<?php 
-					$res = mysql_query("SELECT * FROM isquestions 
+					 include 'adminpanel/src/halimah.php';
+					$res = mysqli_query($db,"SELECT * FROM isquestions 
 					WHERE category_id = '$category' AND q_status = 'Enabled' AND stagesid = '".$_POST['qstage']."' 
-					AND qtypeid = '".$_POST['qtype']."' ORDER BY RAND() ") or die(mysql_error());
-                    $rows = mysql_num_rows($res);
+					AND qtypeid = '".$_POST['qtype']."' ORDER BY RAND() ") or die(mysqli_error());
+                    $rows = mysqli_num_rows($res);
 					$i=1;
-                	while($result = mysql_fetch_array($res)){?>                    
+                	while($result = mysqli_fetch_array($res)){?>                    
                     <?php if($i==1){?>         
                     <div id='question<?php echo $i;?>' class='cont'>
                     <p class='questions' id="qname<?php echo $i;?>"> <?php echo $i?>.<?php echo $result['question_name'];?></p>
@@ -183,12 +183,12 @@ if(isset($_POST[1])){
    
    //$query="select * from questions id IN($order) ORDER BY FIELD(id,$order)";
   // echo $query;exit;
-   
-   $response=mysql_query("select id,answer from isquestions where id IN($order) ORDER BY FIELD(id,$order)")   or die(mysql_error());
+    include 'adminpanel/src/halimah.php';
+   $response = mysqli_query($db,"select id,answer from isquestions where id IN($order) ORDER BY FIELD(id,$order)")   or die(mysql_error());
    $right_answer=0;
    $wrong_answer=0;
    $unanswered=0;
-   while($result=mysql_fetch_array($response)){
+   while($result = mysqli_fetch_array($response)){
        if($result['answer']==$_POST[$result['id']]){
                $right_answer++;
            }else if($_POST[$result['id']]==5){
